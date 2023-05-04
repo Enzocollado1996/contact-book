@@ -15,6 +15,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
   app.useGlobalPipes(new ValidationPipe());
+  console.log('Listening at http://localhost:' + configService.get('PORT'));
   await app.listen(configService.get('PORT'));
 }
 bootstrap();

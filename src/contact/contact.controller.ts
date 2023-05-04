@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ContactDTO } from './dto/contact.dto';
 import { ContactService } from './contact.service';
@@ -23,22 +24,19 @@ export class ContactController {
     return this.contactService.findByEmail(email);
   }
 
-  @Get()
   @Get('name/:name')
   findByPersonalData(@Param('name') name: string) {
     return this.contactService.findByPersonalData(name);
   }
 
-  @Get()
   @Get('phone/:phone')
   findByPhone(@Param('phone') phone: string) {
     return this.contactService.findByPhone(phone);
   }
 
-  @Get()
   @Get('city')
-  findByCity() {
-    return this.contactService.findByCity();
+  findByCity(@Query() query) {
+    return this.contactService.findByCity(query.city);
   }
 
   @Put(':id')

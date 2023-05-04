@@ -7,7 +7,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Contact } from './contact/entities/contact.entity';
 import { Phone } from './contact/entities/phone.entity';
+import { Location } from './contact/entities/location.entity';
 import commonConfig from './config/common.config';
+import { ContactRepository } from './contact/repository/contact.repository';
 
 @Module({
   imports: [
@@ -22,12 +24,13 @@ import commonConfig from './config/common.config';
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_DATABASE'),
         entities: [Contact, Phone, Location],
-        synchronize: false,
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([Contact, Phone, Location]),
   ],
   controllers: [ContactController, AppController],
-  providers: [ContactService, AppService],
+  providers: [ContactService, AppService, ContactRepository],
 })
 export class AppModule {}

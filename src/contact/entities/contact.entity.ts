@@ -34,20 +34,10 @@ export class Contact extends BaseEntity {
   email: string;
 
   @OneToMany(() => Phone, (phone) => phone.id)
-  @JoinColumn({ name: 'phone_id' })
-  phone: Phone;
+  @JoinColumn({ name: 'contactId' })
+  phone: Phone[];
 
   @OneToMany(() => Location, (location) => location.id)
-  @JoinColumn({ name: 'location_id' })
-  location: Location;
-
-  @Column({ type: 'timestamp', nullable: true })
-  @DeleteDateColumn()
-  deleted_at: Date;
-
-  @Column({ type: 'timestamp', nullable: true })
-  created_at: Date;
-
-  @Column({ type: 'timestamp', nullable: true })
-  updated_at: Date;
+  @JoinColumn({ name: 'contactId' })
+  location: Location[];
 }
